@@ -19,8 +19,7 @@ shinyServer(function(input, output) {
       
       withProgress({
         
-       setProgress(message = "Reading News...")
-        
+       setProgress(message = "Läser nyheter...")
        
     url <- read_html("http://www.di.se/")
     
@@ -73,7 +72,7 @@ shinyServer(function(input, output) {
                 scale = c(8,0.5),
                 min.freq = 10, 
                 max.words= input$nwords,
-                colors =fall.colors)
+                colors = fall.colors)
       
     } else {
       
@@ -84,8 +83,10 @@ shinyServer(function(input, output) {
       
       ggplot(head(wordFrame, input$nwords), aes(x = reorder(keyword, -count), y = count, fill = keyword)) + 
         geom_bar(stat = "identity") + 
-        labs(x  = "", y = "Word Frequenzy") +
-        theme(axis.text.x = element_text(angle = 90),
+        labs(x  = "", y = "Frekvens") +
+      #  scale_fill_manual(values = fall.colors) +
+        theme(axis.text.x = element_text(size = 14, angle = 90),
+              axis.title.y = element_text(size = 16),
               plot.background = element_blank(),
               panel.background = element_blank(),
               legend.position = "none")

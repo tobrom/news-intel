@@ -24,20 +24,17 @@ shinyUI(fluidPage(
            
              hr(),
              
-             actionButton("update", "Läs Nyheterna!"),
-           
+             radioButtons("plotType", "Välj typ av plot:",
+                          c("WordCloud" = "wc",
+                            "Bar Chart" = "bar")),
              hr(),
              
-             radioButtons("plotType", "Select Plot Type:",
-                          c("WordCloud" = "wc",
-                            "BarChart" = "bar")),
-             hr(),
              sliderInput("nwords", "Välj antalet ord att visa:",
                          min = 0, max = 30,
-                         value = 10)
+                         value = 10),
+             hr(),
              
-             
-             
+             actionButton("update", "Uppdatera")
              
              ),
            
