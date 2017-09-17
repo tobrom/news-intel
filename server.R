@@ -1,7 +1,7 @@
 library(shiny)
 library(ggplot2)
 library(wordcloud)
-library(tidyverse)
+#library(tidyverse)
 library(rvest)
 library(stringr)
 library(purrr)
@@ -27,7 +27,8 @@ shinyServer(function(input, output) {
       html_nodes("article a") %>%
       html_attr("href")
     
-    newsOnly <- articleRefs[str_detect(articleRefs, "nyheter")] %>% 
+    newsOnly <- articleRefs[str_detect(articleRefs, "nyheter") & 
+      str_detect(articleRefs, "http") == FALSE] %>% 
       na.exclude() %>% 
       paste()
     
@@ -37,7 +38,7 @@ shinyServer(function(input, output) {
       map(getArticles) %>%
       map(function(x) {iconv(x, from = "UTF-8", to = "latin1")})
     
-    
+       
     ###Starting the text analysis
     
     bagWords <- Corpus(VectorSource(articlesText)) %>%
